@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ActividadTbCreateDlg" widgetVar="ActividadTbCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateActividadTbTitle}">
+            <h:form id="ActividadTbCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{actividadTbController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateActividadTbLabel_EIdactividad}" for="EIdactividad" />
+                        <p:inputText id="EIdactividad" value="#{actividadTbController.selected.EIdactividad}" title="#{bundle.CreateActividadTbTitle_EIdactividad}" required="true" requiredMessage="#{bundle.CreateActividadTbRequiredMessage_EIdactividad}"/>
+                        <p:outputLabel value="#{bundle.CreateActividadTbLabel_FFecha}" for="FFecha" />
+                        <p:calendar id="FFecha" pattern="MM/dd/yyyy" value="#{actividadTbController.selected.FFecha}" title="#{bundle.EditActividadTbTitle_FFecha}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateActividadTbLabel_CDuracion}" for="CDuracion" />
+                        <p:inputText id="CDuracion" value="#{actividadTbController.selected.CDuracion}" title="#{bundle.CreateActividadTbTitle_CDuracion}" />
+                        <p:outputLabel value="#{bundle.CreateActividadTbLabel_MDescripcion}" for="MDescripcion" />
+                        <p:inputText id="MDescripcion" value="#{actividadTbController.selected.MDescripcion}" title="#{bundle.CreateActividadTbTitle_MDescripcion}" />
+                        <p:outputLabel value="#{bundle.CreateActividadTbLabel_CNombre}" for="CNombre" />
+                        <p:inputText id="CNombre" value="#{actividadTbController.selected.CNombre}" title="#{bundle.CreateActividadTbTitle_CNombre}" />
+                        <p:outputLabel value="#{bundle.CreateActividadTbLabel_EIdproyecto}" for="EIdproyecto" />
+                        <p:selectOneMenu id="EIdproyecto" value="#{actividadTbController.selected.EIdproyecto}" >
+                            <f:selectItems value="#{proyectoTbController.itemsAvailableSelectOne}"
+                                           var="EIdproyectoItem"
+                                           itemValue="#{EIdproyectoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{actividadTbController.create}" value="#{bundle.Save}" update="display,:ActividadTbListForm:datalist,:growl" oncomplete="handleSubmit(args,'ActividadTbCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ActividadTbCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

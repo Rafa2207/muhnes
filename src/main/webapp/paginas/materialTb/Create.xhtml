@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MaterialTbCreateDlg" widgetVar="MaterialTbCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMaterialTbTitle}">
+            <h:form id="MaterialTbCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{materialTbController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMaterialTbLabel_EIdmaterial}" for="EIdmaterial" />
+                        <p:inputText id="EIdmaterial" value="#{materialTbController.selected.EIdmaterial}" title="#{bundle.CreateMaterialTbTitle_EIdmaterial}" required="true" requiredMessage="#{bundle.CreateMaterialTbRequiredMessage_EIdmaterial}"/>
+                        <p:outputLabel value="#{bundle.CreateMaterialTbLabel_CNombre}" for="CNombre" />
+                        <p:inputText id="CNombre" value="#{materialTbController.selected.CNombre}" title="#{bundle.CreateMaterialTbTitle_CNombre}" />
+                        <p:outputLabel value="#{bundle.CreateMaterialTbLabel_DCantidad}" for="DCantidad" />
+                        <p:inputText id="DCantidad" value="#{materialTbController.selected.DCantidad}" title="#{bundle.CreateMaterialTbTitle_DCantidad}" />
+                        <p:outputLabel value="#{bundle.CreateMaterialTbLabel_MDescripcion}" for="MDescripcion" />
+                        <p:inputText id="MDescripcion" value="#{materialTbController.selected.MDescripcion}" title="#{bundle.CreateMaterialTbTitle_MDescripcion}" />
+                        <p:outputLabel value="#{bundle.CreateMaterialTbLabel_CEstado}" for="CEstado" />
+                        <p:inputText id="CEstado" value="#{materialTbController.selected.CEstado}" title="#{bundle.CreateMaterialTbTitle_CEstado}" />
+                        <p:outputLabel value="#{bundle.CreateMaterialTbLabel_EIdactividad}" for="EIdactividad" />
+                        <p:selectOneMenu id="EIdactividad" value="#{materialTbController.selected.EIdactividad}" >
+                            <f:selectItems value="#{actividadTbController.itemsAvailableSelectOne}"
+                                           var="EIdactividadItem"
+                                           itemValue="#{EIdactividadItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{materialTbController.create}" value="#{bundle.Save}" update="display,:MaterialTbListForm:datalist,:growl" oncomplete="handleSubmit(args,'MaterialTbCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MaterialTbCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

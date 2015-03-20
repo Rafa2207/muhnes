@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProyectoTbEditDlg" widgetVar="ProyectoTbEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProyectoTbTitle}">
+            <h:form id="ProyectoTbEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proyectoTbController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProyectoTbLabel_EIdproyecto}" for="EIdproyecto" />
+                        <p:inputText id="EIdproyecto" value="#{proyectoTbController.selected.EIdproyecto}" title="#{bundle.EditProyectoTbTitle_EIdproyecto}" required="true" requiredMessage="#{bundle.EditProyectoTbRequiredMessage_EIdproyecto}"/>
+                        <p:outputLabel value="#{bundle.EditProyectoTbLabel_MDescripcion}" for="MDescripcion" />
+                        <p:inputText id="MDescripcion" value="#{proyectoTbController.selected.MDescripcion}" title="#{bundle.EditProyectoTbTitle_MDescripcion}" />
+                        <p:outputLabel value="#{bundle.EditProyectoTbLabel_CNombre}" for="CNombre" />
+                        <p:inputText id="CNombre" value="#{proyectoTbController.selected.CNombre}" title="#{bundle.EditProyectoTbTitle_CNombre}" />
+                        <p:outputLabel value="#{bundle.EditProyectoTbLabel_CResponsable}" for="CResponsable" />
+                        <p:inputText id="CResponsable" value="#{proyectoTbController.selected.CResponsable}" title="#{bundle.EditProyectoTbTitle_CResponsable}" />
+                        <p:outputLabel value="#{bundle.EditProyectoTbLabel_FFechaInicio}" for="FFechaInicio" />
+                        <p:calendar id="FFechaInicio" pattern="MM/dd/yyyy" value="#{proyectoTbController.selected.FFechaInicio}" title="#{bundle.EditProyectoTbTitle_FFechaInicio}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditProyectoTbLabel_FFechaFin}" for="FFechaFin" />
+                        <p:calendar id="FFechaFin" pattern="MM/dd/yyyy" value="#{proyectoTbController.selected.FFechaFin}" title="#{bundle.EditProyectoTbTitle_FFechaFin}"  showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proyectoTbController.update}" value="#{bundle.Save}" update="display,:ProyectoTbListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProyectoTbEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProyectoTbEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

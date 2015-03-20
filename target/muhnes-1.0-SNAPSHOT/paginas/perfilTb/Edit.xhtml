@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PerfilTbEditDlg" widgetVar="PerfilTbEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPerfilTbTitle}">
+            <h:form id="PerfilTbEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{perfilTbController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPerfilTbLabel_EIdperfil}" for="EIdperfil" />
+                        <p:inputText id="EIdperfil" value="#{perfilTbController.selected.EIdperfil}" title="#{bundle.EditPerfilTbTitle_EIdperfil}" required="true" requiredMessage="#{bundle.EditPerfilTbRequiredMessage_EIdperfil}"/>
+                        <p:outputLabel value="#{bundle.EditPerfilTbLabel_CNombre}" for="CNombre" />
+                        <p:inputText id="CNombre" value="#{perfilTbController.selected.CNombre}" title="#{bundle.EditPerfilTbTitle_CNombre}" />
+                        <p:outputLabel value="#{bundle.EditPerfilTbLabel_MDescripcion}" for="MDescripcion" />
+                        <p:inputText id="MDescripcion" value="#{perfilTbController.selected.MDescripcion}" title="#{bundle.EditPerfilTbTitle_MDescripcion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{perfilTbController.update}" value="#{bundle.Save}" update="display,:PerfilTbListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PerfilTbEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PerfilTbEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
